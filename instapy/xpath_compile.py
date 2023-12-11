@@ -76,8 +76,8 @@ xpath["get_active_users"] = {
 }
 
 xpath["get_buttons_from_dialog"] = {
-    "follow_button": "//button[text()='Follow']",
-    "unfollow_button": "//button[text() = 'Following']",
+    "follow_button": "//button/div/div[text()='Follow']",
+    "unfollow_button": "//button/div/div[text() = 'Following']",
 }
 
 xpath["get_comment_input"] = {
@@ -95,7 +95,7 @@ xpath["get_comments_on_post"] = {
 xpath["get_cord_location"] = {"json_text": "//body"}
 
 xpath["get_following_status"] = {
-    "follow_button_XP": "//button[text()='Following' or \
+    "follow_button_XP": "//button/div/div[text()='Following' or \
                                   text()='Requested' or \
                                   text()='Follow' or \
                                   text()='Follow Back' or \
@@ -138,8 +138,8 @@ xpath["get_number_of_posts"] = {
 }
 
 xpath["get_relationship_counts"] = {
-    "following_count": "//a[contains(@href,'following') and not(contains(@href,'mutual'))]//span",
-    "followers_count": "//a[contains(@href,'followers') and not(contains(@href,'mutual'))]//span",
+    "following_count": "//a[contains(@href,'following') and not(contains(@href,'mutual'))]//span//span",
+    "followers_count": "//a[contains(@href,'followers') and not(contains(@href,'mutual'))]//span//span",
     "topCount_elements": "//span[contains(@class,'g47SY')]",
 }
 
@@ -172,9 +172,9 @@ xpath["like_from_image"] = {
 xpath["login_user"] = {
     "input_password": "//input[@name='password']",
     "input_username_XP": "//input[@name='username']",
-    "login_elem": "//button[text()='Log In']",
+    "login_elem": "//button[text()='Log in']",
     "login_elem_no_such_exception": "//a[text()='Log in']",
-    "login_elem_no_such_exception_2": "//div[text()='Log In']",
+    "login_elem_no_such_exception_2": "//div[text()='Log in']",
     "nav": "//nav",
     "website_status": "//span[@id='status']",
     "response_time": "//span[@id='response']",
@@ -210,4 +210,4 @@ xpath["likers_from_photo"] = {
     "second_counter_button": "//a[contains(@href,'liked_by')]",
 }
 
-xpath["accept_igcookie_dialogue"] = {"accept_button": "//button[text()='Accept']"}
+xpath["accept_igcookie_dialogue"] = {"accept_button": "//button[text()='Allow all cookies']"}

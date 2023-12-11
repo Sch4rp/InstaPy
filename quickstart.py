@@ -10,7 +10,8 @@ from instapy import set_workspace
 set_workspace(path=None)
 
 # get an InstaPy session!
-session = InstaPy()
+session = InstaPy("prodfv", "Swaq4gec@", headless_browser=False, want_check_browser=False)
+session.login()
 
 with smart_run(session):
     # general settings

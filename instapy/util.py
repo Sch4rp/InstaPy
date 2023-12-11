@@ -1130,10 +1130,10 @@ def format_number(number):
     """
     formatted_num = number.replace(",", "")
     formatted_num = re.sub(
-        r"(k)$", "00" if "." in formatted_num else "000", formatted_num
+        r"([kK])$", "00" if "." in formatted_num else "000", formatted_num
     )
     formatted_num = re.sub(
-        r"(m)$", "00000" if "." in formatted_num else "000000", formatted_num
+        r"([mM])$", "00000" if "." in formatted_num else "000000", formatted_num
     )
     formatted_num = formatted_num.replace(".", "")
     return int(formatted_num)
@@ -1739,9 +1739,11 @@ def find_user_id(browser, track, username, logger):
             browser.execute_script("location.reload()")
             update_activity(browser, state=None)
 
-            user_id = browser.execute_script(
-                "return window._sharedData.entry_data.ProfilePage[0].graphql.user.id"
-            )
+            # user_id = browser.execute_script(
+            #     "return window._sharedData.entry_data.ProfilePage[0].graphql.user.id"
+            # )
+            
+            user_id = getUserData("graphql.user.id", browser)
 
         except WebDriverException:
             if track == "post":

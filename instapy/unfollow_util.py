@@ -31,6 +31,7 @@ from .relationship_tools import get_followers, get_following, get_nonfollowers
 # import InstaPy modules
 from .time_util import sleep
 from .util import (
+    getUserData,
     add_user_to_blacklist,
     click_element,
     click_visibly,
@@ -638,6 +639,7 @@ def scroll_to_bottom_of_followers_list(browser):
 def get_users_through_dialog_with_graphql(
     browser,
     login,
+    user_id,
     user_name,
     amount,
     users_count,
@@ -661,14 +663,14 @@ def get_users_through_dialog_with_graphql(
     if randomize and amount >= 3:
         # expanding the population for better sampling distribution
         amount = amount * 1.9
-    try:
-        user_id = browser.execute_script(
-            "return window.__additionalData[Object.keys(window.__additionalData)[0]].data.graphql.user.id"
-        )
-    except WebDriverException:
-        user_id = browser.execute_script(
-            "return window._sharedData.entry_data.ProfilePage[0].graphql.user.id"
-        )
+    # try:
+    #     user_id = browser.execute_script(
+    #         "return window.__additionalData[Object.keys(window.__additionalData)[0]].data.graphql.user.id"
+    #     )
+    # except WebDriverException:
+    #     user_id = browser.execute_script(
+    #         "return window._sharedData.entry_data.ProfilePage[0].graphql.user.id"
+    #     )
 
     # There are two query hash, one for followers and following, ie:
     # t="c76146de99bb02f6415203be841dd25a",n="d04b0a864b4b54837c0d870b0e77e076"
@@ -968,6 +970,8 @@ def get_given_user_followers(
     user_link = "https://www.instagram.com/{}/".format(user_name)
     web_address_navigator(browser, user_link)
 
+    user_id = getUserData("graphql.user.id", browser)
+
     if not is_page_available(browser, logger):
         return [], []
 
@@ -1008,6 +1012,7 @@ def get_given_user_followers(
     person_list, simulated_list = get_users_through_dialog_with_graphql(
         browser,
         login,
+        user_id,
         user_name,
         amount,
         allfollowers,
